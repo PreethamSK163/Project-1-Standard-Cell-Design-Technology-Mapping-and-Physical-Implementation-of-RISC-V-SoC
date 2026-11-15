@@ -1,68 +1,74 @@
-# Digital VLSI SoC Design & Planning
-> RTL-to-GDSII Physical Design Implementation of PicoRV32a RISC-V Processor
+# Project 1: Standard-Cell Design, Technology Mapping & Physical Implementation of a RISC-V SoC
+
+> Sky130 PDK-Based Standard-Cell Design and RTL-to-GDSII Implementation of the PicoRV32a RISC-V Processor
 
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 ![Tool](https://img.shields.io/badge/Tool-OpenLANE-blue)
 ![PDK](https://img.shields.io/badge/PDK-Sky130-orange)
+![Technology](https://img.shields.io/badge/Technology-130nm%20CMOS-purple)
 ![Language](https://img.shields.io/badge/Language-Verilog%20HDL-purple)
 ![Program](https://img.shields.io/badge/Program-NASSCOM%20FutureSkills%20Prime-red)
 ![License](https://img.shields.io/badge/License-Apache%202.0-blue)
 
-<h2>🔍 Overview</h2>
+## 🔍 Overview
 
-- Complete **RTL-to-GDSII** physical design implementation of the **PicoRV32a RISC-V processor** using the **OpenLANE** automated EDA flow on the **Google SkyWater 130nm (Sky130)** open-source PDK.
+- Complete **RTL-to-GDSII physical implementation** of the **PicoRV32a RISC-V processor** using the **OpenLANE** automated EDA flow and the **Google SkyWater 130nm (Sky130) CMOS PDK**.
+- Explores the relationship between RTL synthesis, standard-cell technology mapping and physical implementation, covering the digital IC implementation flow from Verilog RTL to layout generation.
+- A key component is the **custom standard-cell design and integration (sky130_vsdinv)**, involving transistor-level layout, SPICE simulation, LEF extraction and integration into the Sky130-based implementation flow.
+- Physical implementation includes floorplanning, placement, timing optimisation through engineering change orders (ECOs), clock tree synthesis, power distribution, detailed routing, post-route parasitic extraction and timing analysis.
 
-- The project covers the full digital design flow from RTL synthesis through to fabrication-ready GDSII generation — including integration of a **custom-designed standard cell (sky130_vsdinv)**, timing closure via ECOs, and post-route parasitic extraction.
-
-<h2>🛠️ Tools & Technology Stack</h2>
+## 🛠️ Tools & Technology Stack
 
 | Category | Tool / Technology |
 |---|---|
-| Flow Manager | OpenLANE |
-| PDK | Sky130 (sky130A) |
-| Design | PicoRV32a RISC-V Core |
-| Synthesis | Yosys + ABC |
+| Physical Design Flow | OpenLANE |
+| Process Design Kit | Google SkyWater Sky130 (sky130A) |
+| Technology | 130nm CMOS |
+| Design | PicoRV32a RISC-V Processor |
+| RTL Synthesis | Yosys + ABC |
+| Standard-Cell Mapping | ABC + Sky130 Standard-Cell Library |
 | Static Timing Analysis | OpenSTA |
-| Placement & CTS | OpenROAD, TritonCTS |
-| Routing | TritonRoute |
-| Layout & DRC | Magic VLSI |
+| Placement & Physical Design | OpenROAD, RePlAce |
+| Clock Tree Synthesis | TritonCTS |
+| Routing | FastRoute, TritonRoute |
+| Layout Design & DRC | Magic VLSI |
 | Parasitic Extraction | SPEF Extractor |
 | SPICE Simulation | Ngspice |
-| LVS | Netgen |
-| HDL | Verilog |
-| OS | Ubuntu Linux |
+| Layout Versus Schematic | Netgen |
+| Hardware Description Language | Verilog HDL |
+| Operating System | Ubuntu Linux |
 
-<h2>⚙️ Complete Design Flow</h2>
+## ⚙️ Complete Design Flow
 
 | Stage | Tool | Description | Status |
 |---|---|---|---|
-| RTL Synthesis | Yosys + ABC | Verilog → gate-level netlist, cell mapping | ✅ Complete |
-| Floorplan & Power | OpenROAD | Die area, core utilisation, IO placement | ✅ Complete |
-| Placement | OpenROAD | Standard cell placement, congestion optimisation | ✅ Complete |
-| Custom Cell Design | Magic, Ngspice | sky130_vsdinv — layout, SPICE, LEF extraction | ✅ Complete |
-| Timing ECO | OpenSTA | Setup/hold fixing, cell upsizing, slack closure | ✅ Complete |
-| Clock Tree Synthesis | TritonCTS | Clock insertion, skew minimisation, buffer sizing | ✅ Complete |
-| Power Distribution | OpenROAD | PDN — rings, straps, standard cell rails | ✅ Complete |
-| Routing | TritonRoute | Global + detailed routing, DRC compliance | ✅ Complete |
-| Parasitic Extraction | SPEF Extractor | Post-route RC parasitics for sign-off STA | ✅ Complete |
-| Sign-off STA | OpenSTA | Setup and hold verified with real clock model | ✅ Complete |
-| GDSII Generation | Magic | Final layout — fabrication ready | ✅ Complete |
+| RTL Synthesis | Yosys + ABC | RTL synthesis and technology mapping to Sky130 standard cells | ✅ Complete |
+| Floorplan & Power | OpenROAD | Die and core definition, utilisation planning and IO placement | ✅ Complete |
+| Placement | OpenROAD | Standard-cell placement and congestion optimisation | ✅ Complete |
+| Custom Standard-Cell Design | Magic, Ngspice | sky130_vsdinv layout, SPICE simulation and LEF extraction | ✅ Complete |
+| Timing Optimisation | OpenSTA | Timing analysis, synthesis tuning and cell-sizing ECOs | ✅ Complete |
+| Clock Tree Synthesis | TritonCTS | Clock-tree construction, buffer insertion and skew optimisation | ✅ Complete |
+| Power Distribution | OpenROAD | Power distribution network with rings, straps and cell rails | ✅ Complete |
+| Routing | FastRoute, TritonRoute | Global and detailed signal routing | ✅ Complete |
+| Parasitic Extraction | SPEF Extractor | Post-route RC parasitic extraction | ✅ Complete |
+| Post-Route Timing Analysis | OpenSTA | Timing evaluation using extracted parasitics and propagated clock information | ✅ Complete |
+| GDSII Generation | Magic | Layout stream-out and physical verification | ✅ Complete |
 
-<h2>📊 Key Results</h2>
+## 📊 Key Results
 
 | Metric | Value |
 |---|---|
 | Design | PicoRV32a RISC-V Processor |
-| Technology Node | 130nm (Sky130 PDK) |
+| Process Technology | 130nm CMOS (Sky130 PDK) |
 | Clock Period | 24.73 ns |
 | Clock Frequency | 40.44 MHz |
-| Total Cell Count | 17,108 |
-| Flop Ratio | 9.43% (1,613 flip-flops) |
+| Total Standard Cells | 17,108 |
+| Flip-Flop Count | 1,613 (9.43%) |
 | Chip Area | 181,510.33 µm² |
 | Die Area | 731.18 × 741.90 µm |
 | Core Area | 719.90 × 718.08 µm |
 | Metal Layers | 6 — li1, met1, met2, met3, met4, met5 |
-| Custom Cell Integrated | sky130_vsdinv (Custom Inverter) |
+| Custom Standard Cell | sky130_vsdinv (Custom Inverter) |
 | Post-Synthesis WNS | 0.00 ns |
 | Post-Synthesis TNS | 0.00 ns |
 | Post-Route WNS | 0.00 ns |
@@ -70,82 +76,93 @@
 | Routing Runtime | 25 minutes 21 seconds |
 | DRC Violations | 0 |
 | LVS Status | Clean |
-| GDSII | Generated — Fabrication Ready |
+| GDSII | Generated — DRC/LVS-verified layout |
 
-## 📁Repository Structure
-```
-📁 Project-DigitalVLSI-SoC-Design-Planning
-├── 📁 01 : Synthesis          → RTL synthesis, netlist, cell mapping
-├── 📁 02 : Floorplan          → Floorplan, IO placement, Magic layout
-├── 📁 03 : Placement          → Congestion-aware placement
-├── 📁 04 : Custom cell        → sky130_vsdinv design, SPICE, LEF
-├── 📁 05 : Timing closure     → Slack fixing, OpenSTA, ECO
-├── 📁 06 : CTS                → CTS run, verification, real clock
-├── 📁 07 : PDN                → Power distribution network
-├── 📁 08 : Routing            → TritonRoute global and detailed routing
-├── 📁 09 : GDSII              → SPEF extraction, final GDSII
+## 📁 Repository Structure
+
+```text
+📁 Project-1-Standard-Cell-Design-Technology-Mapping-and-Physical-Implementation-of-RISC-V-SoC
+├── 📁 01 : Synthesis          → RTL synthesis, technology mapping and netlist
+├── 📁 02 : Floorplan          → Floorplan, IO placement and Magic layout
+├── 📁 03 : Placement          → Standard-cell placement and congestion optimisation
+├── 📁 04 : Custom cell        → sky130_vsdinv design, SPICE simulation and LEF
+├── 📁 05 : Timing closure     → Timing analysis, slack optimisation and ECO
+├── 📁 06 : CTS                → Clock tree synthesis and verification
+├── 📁 07 : PDN                → Power distribution network implementation
+├── 📁 08 : Routing            → Global and detailed routing
+├── 📁 09 : GDSII              → SPEF extraction and final GDSII generation
 └── 📄 README.md
 ```
 
-<h2>📝 Stage Details</h2>
+## 📝 Stage Details
 
-**01 — Synthesis** &nbsp;|&nbsp; `Yosys` `ABC` `OpenSTA`
+**01 — RTL Synthesis & Technology Mapping** &nbsp;|&nbsp; `Yosys` `ABC` `OpenSTA`
 
-RTL synthesised using **Yosys** with technology mapping to Sky130 standard cells via ABC. OpenLANE environment initialised, design hierarchy verified, and synthesis reports analysed for cell utilisation, area, and initial timing slack. Gate-level netlist generated as foundation for physical implementation.
+Verilog RTL synthesised using **Yosys**, with **ABC technology mapping** to the Sky130 standard-cell library. OpenLANE environment initialised and design hierarchy verified. Synthesis reports analysed to evaluate mapped cell utilisation, area and initial timing characteristics. The resulting gate-level netlist served as the input for subsequent physical implementation.
+
 > 📁 [View Implementation Results](./01%20:%20Synthesis)
 
-**02 — Floorplan** &nbsp;|&nbsp; `OpenROAD` `Magic`
+**02 — Floorplan & Physical Design Setup** &nbsp;|&nbsp; `OpenROAD` `Magic`
 
-Die area and core utilisation defined. Standard cell rows generated and aligned with Sky130 routing tracks. IO pins placed and verified. Layout opened in **Magic** for visual inspection of row orientation, spacing, and pin accessibility.
+Die dimensions, core area and utilisation defined according to the physical design configuration. Standard-cell rows generated and aligned with Sky130 routing tracks. IO pins placed and verified. The resulting floorplan inspected in **Magic** to examine row orientation, spacing and pin accessibility.
+
 > 📁 [View Implementation Results](./02%20:%20Floorplan)
 
-**03 — Placement** &nbsp;|&nbsp; `OpenROAD` `RePlAce`
+**03 — Standard-Cell Placement** &nbsp;|&nbsp; `OpenROAD` `RePlAce`
 
-Congestion-aware global placement using **RePlAce**. Standard cells placed and legalised within core area. Placement density and routing resource availability verified before proceeding to CTS.
+Congestion-aware global placement performed using **RePlAce**. Sky130 standard cells placed and legalised within the defined core area. Placement density and routing resource availability evaluated before proceeding to clock tree synthesis and subsequent physical implementation stages.
+
 > 📁 [View Implementation Results](./03%20:%20Placement)
 
-**04 — Custom Standard Cell** &nbsp;|&nbsp; `Magic` `Ngspice` `Sky130`
+**04 — Custom Standard-Cell Design & Integration** &nbsp;|&nbsp; `Magic` `Ngspice` `Sky130`
 
-Custom inverter cell **sky130_vsdinv** designed from scratch in **Magic** following Sky130 DRC rules. SPICE netlist extracted and simulated using **Ngspice**. Timing characterised using Sky130 Liberty files. LEF extracted and integrated into OpenLANE flow — verified post-synthesis and post-CTS.
+Custom inverter cell **sky130_vsdinv** designed from scratch in **Magic**, following Sky130 design-rule requirements. Transistor-level layout created, and the corresponding SPICE netlist extracted and simulated using **Ngspice**. Cell timing characterised using Sky130 Liberty files. LEF extracted and integrated into the OpenLANE flow, with the custom cell verified during post-synthesis and post-CTS implementation.
+
 > 📁 [View Implementation Results](./04%20:%20Custom%20cell)
 
-**05 — Timing Closure** &nbsp;|&nbsp; `OpenSTA` `ECO`
+**05 — Timing Analysis & Optimisation** &nbsp;|&nbsp; `OpenSTA` `ECO`
 
-Post-synthesis timing violations identified using **OpenSTA**. Setup slack resolved through synthesis strategy tuning — SYNTH_STRATEGY, SYNTH_BUFFERING, SYNTH_SIZING parameters adjusted. Manual ECOs performed by cell upsizing on critical paths. TNS and WNS verified toward zero before CTS.
+Timing violations and critical paths analysed using **OpenSTA**. Synthesis configuration parameters, including `SYNTH_STRATEGY`, `SYNTH_BUFFERING` and `SYNTH_SIZING`, adjusted to improve timing behaviour. Engineering change orders (ECOs), including cell upsizing on critical paths, applied to address timing constraints. WNS and TNS evaluated throughout the optimisation process.
+
 > 📁 [View Implementation Results](./05%20:%20Timing%20closure)
 
 **06 — Clock Tree Synthesis** &nbsp;|&nbsp; `TritonCTS` `OpenSTA`
 
-Clock tree built using **TritonCTS**. Clock buffers inserted to balance load and minimise skew across all flip-flops. Buffer drive strength experimented — impact on slew, skew, area, and power analysed. Real clock propagation model applied and hold slack verified post-CTS.
+Clock tree constructed using **TritonCTS**, with clock buffers inserted to distribute the clock signal across sequential elements. Buffer drive strengths evaluated to understand their impact on clock slew, skew, area and power. Propagated clock information incorporated into timing analysis, with post-CTS hold timing verified.
+
 > 📁 [View Implementation Results](./06%20:%20CTS)
 
 **07 — Power Distribution Network** &nbsp;|&nbsp; `OpenROAD` `Magic`
 
-PDN generated using `gen_pdn`. Power rings, straps, and standard cell rails built across die. Via connectivity verified at all strap intersections. Custom inverter rail connectivity confirmed in Magic. Design prepared for signal routing with full power integrity.
+Power distribution network generated using `gen_pdn`. Power rings, straps and standard-cell power rails implemented across the design. Via connectivity examined at strap intersections, and custom inverter power-rail connectivity inspected in **Magic** before signal routing.
+
 > 📁 [View Implementation Results](./07%20:%20PDN)
 
-**08 — Routing** &nbsp;|&nbsp; `FastRoute` `TritonRoute`
+**08 — Global & Detailed Routing** &nbsp;|&nbsp; `FastRoute` `TritonRoute`
 
-Global routing performed using **FastRoute** — approximate paths planned across G-cell grid. Detailed routing completed using **TritonRoute** — exact metal shapes and vias placed with full DRC compliance. Iterative optimisation passes reduced violations to zero.
+Global routing performed using **FastRoute** to plan interconnections across the routing grid. Detailed routing completed using **TritonRoute**, generating physical metal interconnects and vias. Iterative routing and optimisation passes performed to achieve zero reported routing violations.
+
 > 📁 [View Implementation Results](./08%20:%20Routing)
 
-**09 — GDSII Generation** &nbsp;|&nbsp; `SPEF Extractor` `Magic` `Netgen`
+**09 — Parasitic Extraction & GDSII Generation** &nbsp;|&nbsp; `SPEF Extractor` `OpenSTA` `Magic` `Netgen`
 
-Post-route parasitic extraction performed using **SPEF Extractor** — RC wire data generated for all nets. Final sign-off STA executed with real parasitics — setup and hold slack both positive. GDSII streamed out using **Magic** — fabrication-ready layout verified DRC-clean.
+Post-route parasitic extraction performed using **SPEF Extractor**, generating resistance and capacitance information for routed nets. Post-route timing analysis executed using the extracted parasitics and propagated clock information to evaluate setup and hold timing. Final layout streamed out in **GDSII format using Magic**, with physical verification results showing zero DRC violations and a clean LVS result using Netgen.
+
 > 📁 [View Implementation Results](./09%20:%20GDSII)
 
-<h2>📚 References</h2>
+## 📚 References
 
-| **Custom Cell Design** | [vsdstdcelldesign by Nickson Jose](https://github.com/nickson-jose/vsdstdcelldesign) |
+| **Category** | **Reference** |
 |:---|:---|
-| **PDK** | [Google SkyWater Sky130 PDK](https://github.com/google/skywater-pdk) |
-| **EDA Flow** | [OpenLANE by efabless](https://github.com/efabless/openlane) |
+| **Custom Standard-Cell Design** | [vsdstdcelldesign by Nickson Jose](https://github.com/nickson-jose/vsdstdcelldesign) |
+| **Process Design Kit** | [Google SkyWater Sky130 PDK](https://github.com/google/skywater-pdk) |
+| **Physical Design Flow** | [OpenLANE by efabless](https://github.com/efabless/openlane) |
 
-<h2>📄 License</h2>
+## 📄 License
 
 This project is licensed under the **Apache License 2.0** — as used by the OpenLANE flow developed by [efabless corporation](https://github.com/efabless/openlane).
 
-<h2>🤝 Connect</h2>
+## 🤝 Connect
 
 | **Author** | Preetham SK |
 |:---|:---|
@@ -153,4 +170,4 @@ This project is licensed under the **Apache License 2.0** — as used by the Ope
 | **LinkedIn** | [linkedin.com/in/preethamsk16](https://www.linkedin.com/in/preethamsk16) |
 | **GitHub** | [github.com/PreethamSK163](https://github.com/PreethamSK163) |
 | **Portfolio** | [preethamsk163.github.io](https://preethamsk163.github.io) |
-| **Email** | preethamsk163@gmail.com |
+| **Email** | skpreetham16@gmail.com |
